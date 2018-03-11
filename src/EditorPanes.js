@@ -3,6 +3,7 @@ import AceEditor from 'react-ace';
 import 'brace/mode/javascript';
 import 'brace/theme/tomorrow_night';
 import {simulateKeys} from './helpers';
+import {lenientToJS, jsToLenient} from './transpile';
 import * as rc from 'recompose';
 
 class EditorPanes extends React.Component {
@@ -14,14 +15,14 @@ class EditorPanes extends React.Component {
 
   onLenientChange = value => {
     this.setState({lenient: value});
-    window.lenientToJS(value, this.options()).then(({code, error}) => {
+    lenientToJS(value, this.options()).then(({code, error}) => {
       this.setState(({js}) => ({js: ex(code, js)}));
     });
   };
 
   onJSChange = value => {
     this.setState({js: value});
-    window.jsToLenient(value, this.options()).then(({code, error}) => {
+    jsToLenient(value, this.options()).then(({code, error}) => {
       this.setState(({lenient}) => ({lenient: ex(code, lenient)}));
     });
   };
