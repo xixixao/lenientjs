@@ -4,6 +4,7 @@ import 'brace/mode/javascript';
 import 'brace/theme/tomorrow_night';
 import {simulateKeys} from './helpers';
 import {lenientToJS, jsToLenient} from './transpile';
+import examples from './examples';
 import * as rc from 'recompose';
 
 class EditorPanes extends React.Component {
@@ -11,6 +12,7 @@ class EditorPanes extends React.Component {
     lenient: '',
     js: '',
     expanded: false,
+    example: null,
   };
 
   onLenientChange = value => {
@@ -46,14 +48,19 @@ class EditorPanes extends React.Component {
     const {expanded} = this.state;
     // React-ace doesn't accept numbers
     return {
-      height: (expanded ? window.innerHeight - 146 : 346) + 'px',
+      height: (expanded ? window.innerHeight - 152 : 346) + 'px',
       width: (expanded ? (window.innerWidth - 120) / 2 : 485) + 'px',
     };
   }
 
+  load(example) {
+    this.setState({example});
+    this.onJSChange(examples[example]);
+  }
+
   componentDidMount() {
     // simulateKeys(LENIENT, value => this.onLenientChange(value), () => {});
-    this.onJSChange(JS);
+    this.load(0);
   }
 
   render() {
@@ -82,67 +89,33 @@ class EditorPanes extends React.Component {
             />
           </div>
         </div>
-        <div className="editorActions">
-          <div role="button" className="editorAction" onClick={this.expand}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 18 18">
-              <path d="M4.5 11H3v4h4v-1.5H4.5V11zM3 7h1.5V4.5H7V3H3v4zm10.5
+        <div className="editorFooter">
+          <div className="editorExamples">
+            {examples.map((_, i) => (
+              <a
+                data-active={i === this.state.example}
+                onClick={() => this.load(i)}>
+                •
+              </a>
+            ))}
+          </div>
+          <div className="editorActions">
+            <div role="button" className="editorAction" onClick={this.expand}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18">
+                <path d="M4.5 11H3v4h4v-1.5H4.5V11zM3 7h1.5V4.5H7V3H3v4zm10.5
                   6.5H11V15h4v-4h-1.5v2.5zM11 3v1.5h2.5V7H15V3h-4z" />
-            </svg>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
     );
   }
 }
-
-const JS = `// Go ahead, edit code in either pane
-
-let number = 42;
-
-const opposite = true;
-
-if (opposite) {
-  number = -42;
-}
-
-const square = x => x * x;
-
-const list = [1, 2, 3, 4, 5];
-
-const math = {
-  root: Math.sqrt,
-  square: square,
-  cube: x => {
-    return x * square(x);
-  }
-};
-
-const race = (winner, ...runners) => {
-  print(winner, runners);
-};
-
-if (elvis ?? false) {
-  alert("I knew it!");
-}
-
-for (const num of list) {
-  print(math.cube(num));
-}
-
-class B extends A {
-  getExample() {
-    return 'Hello world!';
-  }
-
-  setState = x => {
-    this.state = x;
-  };
-}
-`;
 
 const Editor = rc.pure(props => (
   <AceEditor

@@ -304,18 +304,37 @@ svg {
   line-height: 0.8rem;
 }
 
-.editorActions {
+.editorFooter {
   display: flex;
   justify-content: flex-end;
-  padding: 0 8px 4px;
+  padding: 0rem 0.5rem 0.2rem;
   color: #4e5358;
+  font-size: 0.8rem;
+}
+
+.editorExamples {
+  margin-right: 0.5rem;
+}
+
+.editorExamples a {
+  margin-right: 4px;
+  color: #4e5358;
+  cursor: pointer;
+}
+
+.editorExamples a[data-active='true'] {
+  color: #9cc4ff;
+}
+
+.editorActions {
 }
 
 .editorAction {
   cursor: pointer;
 }
 
-.editorAction:hover {
+.editorAction:hover,
+.editorExamples a:hover {
   color: #9cc4ff;
 }
 
