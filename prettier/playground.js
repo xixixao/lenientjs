@@ -2,7 +2,9 @@
 /* eslint no-var: off, strict: off, prefer-arrow-callback: off */
 
 !(function() {
-  var worker = new window.PromiseWorker(new Worker('/prettier/worker.js'));
+  var worker = new window.PromiseWorker(
+    new Worker(window.location.pathname + 'prettier/worker.js'),
+  );
   worker.onmessage = function(message) {
     console.log(message.data.formatted);
   };
