@@ -4,6 +4,9 @@ const worker = new window.PromiseWorker(
   new Worker(window.location.pathname + 'prettier/worker.js'),
 );
 
+const babelPluginsFromLenient = ['lenient'];
+const babelPluginsFromJS = [];
+
 const defaultPrettierOptions = {
   bracketSpacing: false,
   jsxBracketSameLine: true,
@@ -11,19 +14,34 @@ const defaultPrettierOptions = {
   trailingComma: 'all',
 };
 
-export const jsToLenient = (text, options) =>
-  formatAsync(text, [], {
+const prettierOptionsToLenient = {
+  lenient: true,
+  semi: false,
+};
+
+const prettierOptionsToJS = {
+  semi: true,
+};
+
+export const jsToLenient = (text, {printWidth}) =>
+  formatAsync(text, babelPluginsFromJS, {
     ...defaultPrettierOptions,
-    printWidth: options.printWidth,
-    lenient: true,
-    semi: false,
+    ...prettierOptionsToLenient,
+    printWidth,
   });
 
-export const lenientToJS = (text, options) =>
-  formatAsync(text.trim(), ['lenient'], {
+export const lenientToJS = (text, {printWidth}) =>
+  formatAsync(text.trim(), babelPluginsFromLenient, {
     ...defaultPrettierOptions,
-    printWidth: options.printWidth,
-    semi: true,
+    ...prettierOptionsToJS,
+    printWidth,
+  });
+
+export const lenientToLenient = (text, {printWidth}) =>
+  formatAsync(text.trim(), babelPluginsFromLenient, {
+    ...defaultPrettierOptions,
+    ...prettierOptionsToLenient,
+    printWidth,
   });
 
 const formatAsync = (text, plugins, options) => {

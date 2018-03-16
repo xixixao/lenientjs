@@ -2,8 +2,8 @@ import React from 'react';
 import AceEditor from 'react-ace';
 import 'brace/mode/javascript';
 import 'brace/theme/tomorrow_night';
-import {simulateKeys} from './helpers';
-import {lenientToJS, jsToLenient} from './transpile';
+import {lenientToJS, lenientToLenient, jsToLenient} from './transpile';
+import {initialDemo} from './initialDemo';
 import examples from './examples';
 import * as rc from 'recompose';
 
@@ -13,21 +13,36 @@ class EditorPanes extends React.Component {
     js: '',
     expanded: false,
     example: null,
+    inDemoMode: true,
   };
 
-  onLenientChange = value => {
-    this.setState({lenient: value});
+  onLenientChange = (value, range) => {
+    this.setStateWithDemoMode(range, value, value => ({lenient: value}));
     lenientToJS(value, this.options()).then(({code, error}) => {
-      this.setState(({js}) => ({js: ex(code, js)}));
+      this.setState(({js}) => ({js: this.codeUpdate(code, error, js)}));
     });
   };
 
-  onJSChange = value => {
-    this.setState({js: value});
+  onJSChange = (value, range) => {
+    this.setStateWithDemoMode(range, value, value => ({js: value}));
     jsToLenient(value, this.options()).then(({code, error}) => {
-      this.setState(({lenient}) => ({lenient: ex(code, lenient)}));
+      this.setState(({lenient}) => ({
+        lenient: this.codeUpdate(code, error, lenient),
+      }));
     });
   };
+
+  codeUpdate(code, error, prevCode) {
+    return ex(this.state.inDemoMode ? code : ex(code, error), prevCode);
+  }
+
+  setStateWithDemoMode(range, value, setter) {
+    this.setState(state => {
+      const wasInDemoMode = state.inDemoMode;
+      const inDemoMode = wasInDemoMode && range == null;
+      return {inDemoMode, ...setter(wasInDemoMode && !inDemoMode ? '' : value)};
+    });
+  }
 
   options() {
     return {
@@ -49,19 +64,65 @@ class EditorPanes extends React.Component {
     // React-ace doesn't accept numbers
     return {
       height: (expanded ? window.innerHeight - 152 : 346) + 'px',
-      width: (expanded ? (window.innerWidth - 120) / 2 : 485) + 'px',
+      width: (expanded ? (window.innerWidth - 120) / 2 : 489) + 'px',
     };
   }
 
-  load(example) {
+  load = example => {
     this.setState({example});
     this.onJSChange(examples[example]);
-  }
+    if (this.editorLenient != null) {
+      for (const editor of [this.editorLenient, this.editorJS]) {
+        editor.clearSelection();
+        editor.moveCursorTo(0, 0);
+        editor.scrollToRow(0);
+      }
+    }
+  };
 
   componentDidMount() {
-    // simulateKeys(LENIENT, value => this.onLenientChange(value), () => {});
-    this.load(0);
+    initialDemo({
+      setLenient: this.inDemo(this.onLenientChange),
+      setJS: this.inDemo(this.onJSChange),
+      formatLenient: this.inDemo(this.formatLenient),
+    }).then(() => {
+      this.inDemo(this.load)(0);
+    });
   }
+
+  inDemo(cb) {
+    return (...args) => {
+      if (this.state.inDemoMode) {
+        cb(...args);
+      }
+    };
+  }
+
+  formatLenient = () => {
+    lenientToLenient(this.state.lenient, this.options()).then(
+      ({code, error}) => {
+        this.setState(({lenient, js}) => ({
+          lenient: ex(code, lenient),
+          js: ex(error, js),
+        }));
+      },
+    );
+  };
+
+  onLoadLenient = editor => {
+    this.editorLenient = editor;
+    editor.commands.addCommand({
+      name: 'formatUsingPrettier',
+      bindKey: {win: 'Ctrl-P', mac: 'Ctrl-P'},
+      exec: _editor => {
+        this.formatLenient();
+      },
+    });
+  };
+
+  onLoadJS = editor => {
+    this.editorJS = editor;
+  };
 
   render() {
     const editorProps = this.editorProps();
@@ -74,6 +135,7 @@ class EditorPanes extends React.Component {
               {...editorProps}
               value={this.state.lenient}
               onChange={this.onLenientChange}
+              onLoad={this.onLoadLenient}
             />
           </div>
           <div className="editorPaneLabel">
@@ -86,6 +148,7 @@ class EditorPanes extends React.Component {
               {...editorProps}
               value={this.state.js}
               onChange={this.onJSChange}
+              onLoad={this.onLoadJS}
             />
           </div>
         </div>
@@ -93,6 +156,7 @@ class EditorPanes extends React.Component {
           <div className="editorExamples">
             {examples.map((_, i) => (
               <a
+                key={i}
                 data-active={i === this.state.example}
                 onClick={() => this.load(i)}>
                 •

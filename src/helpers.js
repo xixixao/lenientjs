@@ -1,28 +1,35 @@
-export function simulateKeys(text, cb, finished) {
+export function simulateKeys(text, cb, {after, before} = {}) {
   let charIndex = 0;
   let timeout;
 
-  function simulateKey() {
-    const delay =
-      Math.round(Math.random() * 125) + /\s/.test(text[charIndex] || '')
-        ? 100
-        : 30;
+  return new Promise(resolve => {
+    function simulateKey() {
+      const [match] = text.slice(charIndex).match(/^[^\s]+/) || [];
 
-    timeout = setTimeout(() => {
-      charIndex++;
+      const delay =
+        Math.round(Math.random() * 15) + 100 / (match || '  ').length;
 
-      cb(text.substring(0, charIndex));
+      timeout = setTimeout(() => {
+        charIndex++;
 
-      if (charIndex < text.length) {
-        simulateKey();
-      } else {
-        // editor.selection.selectAll();
-        // editor.setReadOnly(false);
-        clearTimeout(timeout);
-        finished();
-      }
-    }, delay);
-  }
+        cb((before || '') + text.substring(0, charIndex) + (after || ''));
 
-  simulateKey();
+        if (charIndex < text.length) {
+          simulateKey();
+        } else {
+          // editor.selection.selectAll();
+          // editor.setReadOnly(false);
+          clearTimeout(timeout);
+          resolve();
+        }
+      }, delay);
+    }
+
+    simulateKey();
+  });
 }
+
+export const timeout = delay =>
+  new Promise(resolve => {
+    setTimeout(resolve, delay);
+  });

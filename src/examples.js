@@ -159,4 +159,56 @@ $.ajax({
     alert('The request is complete!');
   });
 `,
+  `// http://learnyouahaskell.com/recursion#maximum-awesome
+const naiveQuicksort = list =>
+  empty(list)
+    ? []
+    : do {
+        const [x, ...xs] = list;
+        const smallerSorted = xs.filter(a => a <= x);
+        const biggerSorted = xs.filter(a => a > x);
+        [...smallerSorted, x, ...biggerSorted];
+      };
+
+// http://khan4019.github.io
+//   /front-end-Interview-Questions/sort.html#quicksort
+const quickSort = (arr, left, right) => {
+  if (left < right) {
+    const pivot = right;
+    const partitionIndex = partition(
+      arr,
+      pivot,
+      left,
+      right,
+    );
+
+    //sort left and right
+    quickSort(arr, left, partitionIndex - 1);
+    quickSort(arr, partitionIndex + 1, right);
+  }
+
+  return arr;
+};
+
+const partition = (arr, pivot, left, right) => {
+  const pivotValue = arr[pivot];
+  let partitionIndex = left;
+
+  for (let i = left; i < right; i++) {
+    if (arr[i] < pivotValue) {
+      swap(arr, i, partitionIndex);
+      partitionIndex++;
+    }
+  }
+
+  swap(arr, right, partitionIndex);
+  return partitionIndex;
+};
+
+const swap = (arr, i, j) => {
+  const temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+};
+`,
 ];

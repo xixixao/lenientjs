@@ -136,7 +136,7 @@ function formatCode(text, options) {
   } catch (e) {
     if (e.constructor && e.constructor.name === 'SyntaxError') {
       // Likely something wrong with the user's code
-      return {code: String(e)};
+      return {error: String(e)};
     }
     // Likely a bug in Prettier
     // Provide the whole stack for debugging
