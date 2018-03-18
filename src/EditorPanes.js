@@ -61,10 +61,18 @@ class EditorPanes extends React.Component {
 
   editorProps() {
     const {expanded} = this.state;
+    // 35em || 28em
+    const isMobile = window.innerWidth < 560; // || window.height < 448;
+    if (isMobile) {
+      return {
+        height: 180,
+        width: window.innerWidth - 89,
+      };
+    }
     // React-ace doesn't accept numbers
     return {
       height: (expanded ? window.innerHeight - 152 : 346) + 'px',
-      width: (expanded ? (window.innerWidth - 120) / 2 : 489) + 'px',
+      width: (expanded ? (window.innerWidth - 152) / 2 : 489) + 'px',
     };
   }
 

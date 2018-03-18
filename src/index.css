@@ -4,34 +4,6 @@
   box-sizing: border-box;
   margin: 0;
 }
-@media (min-width: 35em) {
-  .col {
-    display: table-cell;
-  }
-  .\31 {
-    width: 5%;
-  }
-  .\33 {
-    width: 22%;
-  }
-  .\34 {
-    width: 30%;
-  }
-  .\35 {
-    width: 40%;
-  }
-  .\32 {
-    width: 15%;
-  }
-  .row {
-    display: table;
-    border-spacing: 1em 0;
-  }
-}
-.row,
-.w-100 {
-  width: 100%;
-}
 hr {
   outline: 0;
   border: solid #fa0;
@@ -124,7 +96,7 @@ h6 {
   font-weight: 200;
   margin-top: 1.5rem;
   margin-bottom: 0;
-  line-height: 1.5rem;
+  /* line-height: 1.5rem; */
   /* -webkit-font-smoothing: antialiased; */
 }
 h1 {
@@ -183,6 +155,8 @@ html {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     Arial, sans-serif;
+  /* Prevent font scaling on iOS in landscape while allowing user zoom */
+  -webkit-text-size-adjust: 100%;
   /* --dark-bg-color: #15243b; */
   --dark-bg-color: #26487b;
   --light-text-color: white;
@@ -190,6 +164,12 @@ html {
   --editor-bg-color: #1d1f21;
   --snippet-bg-color: #2e5186;
   --footer-bg-color: #2e5186;
+}
+
+@media (min-width: 35em) and (min-height: 28em) {
+  html {
+    font-size: 18px;
+  }
 }
 
 body {
@@ -216,7 +196,8 @@ a {
 
 .titleHeader {
   margin: auto;
-  width: 60rem;
+  max-width: 62rem;
+  padding: 0 1rem;
   display: flex;
 }
 
@@ -239,7 +220,7 @@ a.topLink {
 }
 
 .editorWrap {
-  padding: 1rem 0 2rem;
+  padding: 1rem 1rem 2rem;
   color: #fafafa;
   display: flex;
 }
@@ -249,7 +230,7 @@ a.topLink {
   /* border: 2px solid #424242; */
   box-shadow: 0 10px 68px rgba(0, 0, 0, 0.55);
   margin: auto;
-  /* width: 60rem; */
+  /* max-width: 60rem; */
   /* background: #1b2b34;
   background: #fc5a4f; */
   background-color: var(--editor-bg-color);
@@ -272,7 +253,8 @@ div.editor .ace_constant.ace_numeric {
 
 .panes {
   display: flex;
-  padding: 1.5rem 1.5rem 0;
+  flex-direction: column;
+  padding: 1.5rem 1.5rem 0.8rem;
 }
 
 .pane {
@@ -291,17 +273,34 @@ div.editor .ace_constant.ace_numeric {
 
 pre {
   font-family: Monaco, Consolas, monospace;
-  font-size: 14px;
+  font-size: 0.777777rem;
   -webkit-font-smoothing: auto;
+  padding: 0 2rem;
+  position: relative;
 }
 
 .snippet {
   border-radius: 5px;
   background-color: var(--snippet-bg-color);
-  padding: 0 2rem;
+  box-shadow: inset 0 0 60px var(--snippet-bg-color);
+  position: relative;
+  overflow: scroll;
 }
 
-svg {
+.snippet:before {
+  content: '';
+  display: block;
+  box-shadow: inset 0 0 10px 10px var(--snippet-bg-color);
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  pointer-events: none;
+}
+
+​ svg {
   fill: currentColor;
 }
 
@@ -311,13 +310,14 @@ svg {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 1rem;
+  align-items: center;
+  padding: 0.5rem 1rem 0.5rem;
   font-size: 0.8rem;
   line-height: 0.8rem;
 }
 
 .editorFooter {
-  display: flex;
+  display: none;
   justify-content: flex-end;
   padding: 0rem 0.5rem 0.2rem;
   color: #4e5358;
@@ -350,22 +350,72 @@ svg {
   color: #9cc4ff;
 }
 
+@media (min-width: 35em) and (min-height: 28em) {
+  .editorFooter {
+    display: flex;
+  }
+}
+
+@media (min-width: 35em) {
+  .panes {
+    flex-direction: row;
+    padding-bottom: 0;
+  }
+}
+
 .content {
   margin: auto;
-  width: 60rem;
+  max-width: 62rem;
+  padding: 0 1rem;
 }
 
 .subTitle {
+  margin-top: 0;
 }
 
 .columns {
   display: flex;
-  margin: 2rem -2rem 4rem;
+  flex-direction: column;
+  margin: 2rem 0 2rem;
 }
 
 .column {
   flex: 1;
-  padding: 2rem 2rem 0;
+  padding-top: 2rem;
+}
+
+@media (min-width: 35em) and (min-height: 28em) {
+  .columns {
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    margin-bottom: 4rem;
+  }
+
+  .column {
+    width: 50%;
+  }
+
+  .c-r {
+    flex-direction: row-reverse;
+  }
+
+  .column:first-child {
+    padding-right: 2rem;
+  }
+
+  .column:last-child {
+    padding-left: 2rem;
+  }
+
+  .c-r .column:first-child {
+    padding-right: 0;
+    padding-left: 2rem;
+  }
+  .c-r .column:last-child {
+    padding-right: 2rem;
+    padding-left: 0;
+  }
 }
 
 .c-k {
@@ -373,7 +423,7 @@ svg {
 }
 
 .centerColumn {
-  width: 40rem;
+  max-width: 40rem;
   margin: 0 auto;
 }
 
