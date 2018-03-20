@@ -35,8 +35,7 @@ const App = () => (
         </div>
         <div className="column">
           <div className="snippet">
-            <pre>{`
-object = {
+            <pre>{`object = {
   myFunctionA()
     ...
     return "sucess"
@@ -44,8 +43,7 @@ object = {
   myFunctionB()
     ...
     return "more sucess"
-}
-            `}</pre>
+}`}</pre>
           </div>
         </div>
       </div>
@@ -59,14 +57,12 @@ object = {
           </p>
         </div>
         <div className="column">
-          <pre className="snippet">{`
-all = "is"
+          <pre className="snippet">{`all = "is"
 good = "when"
 constants = ["are", "cheap"]
 
 let mutation = null
-mutation := "looks different"
-            `}</pre>
+mutation := "looks different"`}</pre>
         </div>
       </div>
       <div className="columns">
@@ -81,8 +77,7 @@ mutation := "looks different"
         </div>
         <div className="column">
           <div className="snippet">
-            <pre>{`
-firstResults = callMethod()
+            <pre>{`firstResults = callMethod()
 [1, 2].forEach(x =>
   transformedX = transform(x)
   adapter(base =>
@@ -90,8 +85,7 @@ firstResults = callMethod()
     return
       transformedX ?? transformedBase ?? firstResults
   )
-)
-            `}</pre>
+)`}</pre>
           </div>
         </div>
       </div>
@@ -107,8 +101,7 @@ firstResults = callMethod()
           </p>
         </div>
         <div className="column">
-          <pre className="snippet">{`
-f = (x) =>
+          <pre className="snippet">{`f = (x) =>
   x * 2
 
 g = (x) =>
@@ -117,8 +110,7 @@ g = (x) =>
 
 h = () => [a, b]
 
-j = () => {a: 1, b: 2}
-            `}</pre>
+j = () => {a: 1, b: 2}`}</pre>
         </div>
       </div>
       <div className="columns">
@@ -130,12 +122,10 @@ j = () => {a: 1, b: 2}
           </p>
         </div>
         <div className="column">
-          <pre className="snippet">{`
-element: React.Element<any> =
+          <pre className="snippet">{`element: React.Element<any> =
   <>
     Fancy fragment JSX syntax
-  </>
-            `}</pre>
+  </>`}</pre>
         </div>
       </div>
       {/* <div className="columns">

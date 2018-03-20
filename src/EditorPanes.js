@@ -95,6 +95,7 @@ class EditorPanes extends React.Component {
       formatLenient: this.inDemo(this.formatLenient),
     }).then(() => {
       this.inDemo(this.load)(0);
+      this.setState({inDemoMode: false});
     });
   }
 
