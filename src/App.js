@@ -93,11 +93,11 @@ mutation := "looks different"`}</pre>
         <div className="column">
           <h2>Simpler blocks and arrow functions</h2>
           <p>
-            Blocks do not require braces, they can be simply indented. This
-            applies to arrow function bodies as well. Lenient fixes two major
-            annoyances with regards to arrow functions: it is easy to go between
-            block and expression body arrow function, and object literals as
-            results don't need to be wrapped in parentheses.
+            Blocks use indentation instead of braces. This applies to arrow
+            function bodies as well. Lenient fixes two major annoyances with
+            regards to arrow functions: it is easy to go between block and
+            expression body arrow function, and object literals as results don't
+            need to be wrapped in parentheses.
           </p>
         </div>
         <div className="column">
@@ -193,6 +193,29 @@ j = () => {a: 1, b: 2}`}</pre>
         <p>
           To display all editor annotations correctly, Prettier also has to
           support source maps.
+        </p>
+      </div>
+      <div className="centerColumn">
+        <h2>Compat mode</h2>
+        <p>
+          If you're not ready to make the full jump to Lenient, there is a
+          Compat mode. Compat mode is mostly backwards compatible with standard
+          JavaScript. It differs from full Lenient in the following ways:
+        </p>
+        <ul>
+          <li>
+            Objects as return values of arrow functions have to be wrapped in
+            parentheses. Braces can be used for denoting any block (in Lenient,
+            arrow functions cannot use braces).
+          </li>
+          <li>
+            There's no shortcut for declaring constants, `const` is used for
+            both reading and writing.
+          </li>
+        </ul>
+        <p>
+          This means that most well-formatted JavaScript will transpile to the
+          same code in Compat mode.
         </p>
       </div>
       {/* <div className="columns">
