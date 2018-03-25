@@ -11,6 +11,11 @@
     "shelljs": "^0.8.1"
   },
   "scripts": {
-    "setup": "node setup.js"
+    "bump": "node bump.js",
+    "bump:babylon": "node bump-babylon.js",
+    "bump:prettier": "node bump-prettier.js",
+    "setup": "node setup.js",
+    "test":
+      "cd prettier; ln -sf ../../babel/packages/babylon node_modules/babylon-lenient; yarn test:lenient"
   }
 }

@@ -1,11 +1,8 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
 const shell = require('shelljs');
 const chalk = require('chalk');
-
-shell.config.verbose = true;
+shell.set('-v');
 
 console.log(chalk.cyan('Cloning babel...'));
 shell.exec('git clone https://github.com/xixixao/babel.git');
@@ -19,6 +16,7 @@ shell.exec('git clone https://github.com/xixixao/prettier.git');
 shell.cd('prettier');
 shell.exec('git checkout lenient');
 shell.exec('yarn');
+shell.ln('-sf', '../../babel/packages/babylon', 'node_modules/babylon-lenient');
 shell.cd('..');
 
 console.log(chalk.cyan('Cloning website...'));
@@ -28,4 +26,4 @@ shell.exec('git checkout website');
 shell.exec('yarn');
 shell.cd('..');
 
-console.log(chalk.cyan('\nAll setup!'));
+console.log(chalk.cyan('\nAll set up!'));
