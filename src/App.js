@@ -61,7 +61,7 @@ const App = () => (
 good = "when"
 constants = ["are", "cheap"]
 
-let mutation = null
+let mutation := null
 mutation := "looks different"`}</pre>
         </div>
       </div>

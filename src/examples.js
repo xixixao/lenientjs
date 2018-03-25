@@ -1,5 +1,9 @@
-export default [
-  `// Go ahead, edit code in either pane
+export default isMobile => [
+  `${
+    isMobile
+      ? `// Go ahead, edit code\n// in either pane`
+      : `// Go ahead, edit code in either pane`
+  }
 
 let number = 42;
 

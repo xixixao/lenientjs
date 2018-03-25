@@ -4,8 +4,12 @@ import 'brace/mode/javascript';
 import 'brace/theme/tomorrow_night';
 import {lenientToJS, lenientToLenient, jsToLenient} from './transpile';
 import {initialDemo} from './initialDemo';
+import {initialMobileDemo} from './initialMobileDemo';
 import examples from './examples';
+import isTouchBrowser from './isTouchBrowser';
 import * as rc from 'recompose';
+
+const touchOnly = isTouchBrowser();
 
 class EditorPanes extends React.Component {
   state = {
@@ -61,24 +65,25 @@ class EditorPanes extends React.Component {
 
   editorProps() {
     const {expanded} = this.state;
-    // 35em || 28em
-    const isMobile = window.innerWidth < 560; // || window.height < 448;
-    if (isMobile) {
+    if (isMobile()) {
       return {
-        height: 180,
-        width: window.innerWidth - 89,
+        height: 180 + 'px',
+        width: window.innerWidth - 89 + 'px',
       };
     }
     // React-ace doesn't accept numbers
     return {
       height: (expanded ? window.innerHeight - 152 : 346) + 'px',
-      width: (expanded ? (window.innerWidth - 152) / 2 : 489) + 'px',
+      width:
+        (expanded || window.innerWidth < 1130
+          ? (window.innerWidth - 152) / 2
+          : 489) + 'px',
     };
   }
 
   load = example => {
-    this.setState({example});
-    this.onJSChange(examples[example]);
+    this.setState({example, inDemoMode: false});
+    this.onJSChange(examples(isMobile())[example]);
     if (this.editorLenient != null) {
       for (const editor of [this.editorLenient, this.editorJS]) {
         editor.clearSelection();
@@ -89,13 +94,15 @@ class EditorPanes extends React.Component {
   };
 
   componentDidMount() {
-    initialDemo({
+    (isMobile() ? initialMobileDemo : initialDemo)({
       setLenient: this.inDemo(this.onLenientChange),
       setJS: this.inDemo(this.onJSChange),
       formatLenient: this.inDemo(this.formatLenient),
     }).then(() => {
       this.inDemo(this.load)(0);
-      this.setState({inDemoMode: false});
+    });
+    window.addEventListener('resize', () => {
+      this.forceUpdate();
     });
   }
 
@@ -161,30 +168,37 @@ class EditorPanes extends React.Component {
             />
           </div>
         </div>
-        <div className="editorFooter">
-          <div className="editorExamples">
-            {examples.map((_, i) => (
-              <a
-                key={i}
-                data-active={i === this.state.example}
-                onClick={() => this.load(i)}>
-                •
-              </a>
-            ))}
-          </div>
-          <div className="editorActions">
-            <div role="button" className="editorAction" onClick={this.expand}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 18 18">
-                <path d="M4.5 11H3v4h4v-1.5H4.5V11zM3 7h1.5V4.5H7V3H3v4zm10.5
+
+        {touchOnly || isMobile() ? null : (
+          <div className="editorFooter">
+            <div className="editorExamples">
+              {examples(isMobile()).map((_, i) => (
+                <a
+                  key={i}
+                  data-active={i === this.state.example}
+                  onClick={() => this.load(i)}>
+                  •
+                </a>
+              ))}
+            </div>
+            <div className="editorActions">
+              <div
+                data-active={this.state.expanded}
+                role="button"
+                className="editorAction"
+                onClick={this.expand}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18">
+                  <path d="M4.5 11H3v4h4v-1.5H4.5V11zM3 7h1.5V4.5H7V3H3v4zm10.5
                   6.5H11V15h4v-4h-1.5v2.5zM11 3v1.5h2.5V7H15V3h-4z" />
-              </svg>
+                </svg>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     );
   }
@@ -209,5 +223,8 @@ const Editor = rc.pure(props => (
 ));
 
 const ex = (a, b) => (a != null ? a : b);
+
+// 35em || 28em
+const isMobile = () => window.innerWidth < 560; // || window.height < 448;
 
 export default EditorPanes;

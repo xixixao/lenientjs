@@ -300,10 +300,6 @@ pre {
   pointer-events: none;
 }
 
-​ svg {
-  fill: currentColor;
-}
-
 .editorPaneLabel {
   /* color: #5ab3b3;
   color: #ffc6c2; */
@@ -317,7 +313,6 @@ pre {
 }
 
 .editorFooter {
-  display: none;
   justify-content: flex-end;
   padding: 0rem 0.5rem 0.2rem;
   color: #4e5358;
@@ -328,26 +323,26 @@ pre {
   margin-right: 0.5rem;
 }
 
-.editorExamples a {
-  margin-right: 4px;
+.editorExamples a,
+.editorAction {
   color: #4e5358;
+  fill: #4e5358;
   cursor: pointer;
 }
 
-.editorExamples a[data-active='true'] {
-  color: #9cc4ff;
+.editorExamples a {
+  margin-right: 4px;
 }
 
 .editorActions {
 }
 
-.editorAction {
-  cursor: pointer;
-}
-
+.editorExamples a[data-active='true'],
+.editorAction[data-active='true'],
 .editorAction:hover,
 .editorExamples a:hover {
   color: #9cc4ff;
+  fill: #9cc4ff;
 }
 
 @media (min-width: 35em) and (min-height: 28em) {
