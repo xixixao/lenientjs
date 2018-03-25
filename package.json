@@ -1,0 +1,16 @@
+{
+  "name": "lenientjs",
+  "version": "0.0.1",
+  "description": "Development repo",
+  "main": "index.js",
+  "repository": "https://github.com/xixixao/lenientjs.git",
+  "author": "xixixao <xixixao@seznam.cz>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.3.2",
+    "shelljs": "^0.8.1"
+  },
+  "scripts": {
+    "setup": "node setup.js"
+  }
+}
