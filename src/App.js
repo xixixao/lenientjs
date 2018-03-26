@@ -248,6 +248,7 @@ const GitHubLink = ({className}) => (
   <a
     className={className}
     href="https://github.com/xixixao/lenientjs"
+    rel="noopener noreferrer"
     target="_blank">
     GitHub
   </a>
