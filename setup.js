@@ -1,18 +1,22 @@
 'use strict';
 
-const shell = require('shelljs');
 const chalk = require('chalk');
+const shell = require('shelljs');
+
 shell.set('-v');
 
+const clone = repo =>
+  shell.exec(`git clone ${repo} --shallow-since=2018-01-01 --no-single-branch`);
+
 console.log(chalk.cyan('Cloning babel...'));
-shell.exec('git clone https://github.com/xixixao/babel.git');
+clone('https://github.com/xixixao/babel.git');
 shell.cd('babel');
 shell.exec('git checkout lenient');
 shell.exec('make bootstrap');
 shell.cd('..');
 
 console.log(chalk.cyan('Cloning prettier...'));
-shell.exec('git clone https://github.com/xixixao/prettier.git');
+clone('https://github.com/xixixao/prettier.git');
 shell.cd('prettier');
 shell.exec('git checkout lenient');
 shell.exec('yarn');
@@ -20,7 +24,7 @@ shell.ln('-sf', '../../babel/packages/babylon', 'node_modules/babylon-lenient');
 shell.cd('..');
 
 console.log(chalk.cyan('Cloning website...'));
-shell.exec('git clone https://github.com/xixixao/lenientjs.git website');
+clone('https://github.com/xixixao/lenientjs.git website');
 shell.cd('website');
 shell.exec('git checkout website');
 shell.exec('yarn');

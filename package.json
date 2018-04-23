@@ -17,5 +17,11 @@
     "setup": "node setup.js",
     "test":
       "cd prettier; ln -sf ../../babel/packages/babylon node_modules/babylon-lenient; yarn test:lenient"
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "jsxBracketSameLine": true,
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }
