@@ -303,6 +303,7 @@ div.editor .ace_constant.ace_numeric {
 .snippet {
   border-radius: 5px;
   background-color: var(--editor-bg-color);
+  margin-top: 4px;
   padding: 1rem;
 }
 
