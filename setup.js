@@ -23,6 +23,12 @@ shell.exec('yarn');
 shell.ln('-sf', '../../babel/packages/babylon', 'node_modules/babylon-lenient');
 shell.cd('..');
 
+console.log(chalk.cyan('Cloning atom-lenientjs...'));
+clone('https://github.com/xixixao/atom-lenientjs.git');
+shell.cd('atom-lenientjs');
+shell.exec('yarn');
+shell.cd('..');
+
 console.log(chalk.cyan('Cloning website...'));
 clone('https://github.com/xixixao/lenientjs.git website');
 shell.cd('website');

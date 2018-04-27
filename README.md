@@ -51,6 +51,14 @@ or during development use watch mode:
 yarn test --watchAll
 ```
 
+### Atom Package
+
+```bash
+yarn build:atom
+cd atom-lenientjs
+apm publish minor
+```
+
 ### Website
 
 Watch changes and serve locally:

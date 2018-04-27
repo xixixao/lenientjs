@@ -1,4 +1,6 @@
-prettier
+.DS_Store
+atom-lenientjs
 babel
-website
 node_modules
+prettier
+website

@@ -11,6 +11,7 @@
     "shelljs": "^0.8.1"
   },
   "scripts": {
+    "build:atom": "node build-atom-package.js",
     "bump": "node bump.js",
     "bump:babylon": "node bump-babylon.js",
     "bump:prettier": "node bump-prettier.js",
