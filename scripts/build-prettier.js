@@ -9,7 +9,7 @@ console.log(chalk.cyan('Building prettier...'));
 shell.config.verbose = true;
 
 shell.cd('../prettier');
-shell.exec('rollup -c scripts/build/rollup.index.config.js');
+shell.exec('yarn rollup -c scripts/build/rollup.index.config.js');
 
 const dest = 'website/static/lib/index.js';
 shell.cp('dist/index.js', dest);
