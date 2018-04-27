@@ -1,5 +1,6 @@
 import React from 'react';
 import EditorPanes from './EditorPanes';
+import ReadOnlyEditor from './ReadOnlyEditor';
 
 const App = () => (
   <div>
@@ -34,8 +35,8 @@ const App = () => (
           </p>
         </div>
         <div className="column">
-          <div className="snippet">
-            <pre>{`object = {
+          <ReadOnlyEditor>
+            {`object = {
   myFunctionA()
     ...
     return "sucess"
@@ -43,8 +44,8 @@ const App = () => (
   myFunctionB()
     ...
     return "more sucess"
-}`}</pre>
-          </div>
+}`}
+          </ReadOnlyEditor>
         </div>
       </div>
       <div className="columns c-r">
@@ -57,12 +58,12 @@ const App = () => (
           </p>
         </div>
         <div className="column">
-          <pre className="snippet">{`all = "is"
+          <ReadOnlyEditor>{`all = "is"
 good = "when"
 constants = ["are", "cheap"]
 
 let mutation := null
-mutation := "looks different"`}</pre>
+mutation := "looks different"`}</ReadOnlyEditor>
         </div>
       </div>
       <div className="columns">
@@ -76,8 +77,7 @@ mutation := "looks different"`}</pre>
           </p>
         </div>
         <div className="column">
-          <div className="snippet">
-            <pre>{`firstResults = callMethod()
+          <ReadOnlyEditor>{`firstResults = callMethod()
 [1, 2].forEach(x =>
   transformedX = transform(x)
   adapter(base =>
@@ -85,8 +85,7 @@ mutation := "looks different"`}</pre>
     return
       transformedX ?? transformedBase ?? firstResults
   )
-)`}</pre>
-          </div>
+)`}</ReadOnlyEditor>
         </div>
       </div>
       <div className="columns c-r">
@@ -101,7 +100,7 @@ mutation := "looks different"`}</pre>
           </p>
         </div>
         <div className="column">
-          <pre className="snippet">{`f = (x) =>
+          <ReadOnlyEditor>{`f = (x) =>
   x * 2
 
 g = (x) =>
@@ -110,7 +109,7 @@ g = (x) =>
 
 h = () => [a, b]
 
-j = () => {a: 1, b: 2}`}</pre>
+j = () => {a: 1, b: 2}`}</ReadOnlyEditor>
         </div>
       </div>
       <div className="columns">
@@ -122,10 +121,10 @@ j = () => {a: 1, b: 2}`}</pre>
           </p>
         </div>
         <div className="column">
-          <pre className="snippet">{`element: React.Element<any> =
+          <ReadOnlyEditor>{`element: React.Element<any> =
   <>
     Fancy fragment JSX syntax
-  </>`}</pre>
+  </>`}</ReadOnlyEditor>
         </div>
       </div>
       {/* <div className="columns">
