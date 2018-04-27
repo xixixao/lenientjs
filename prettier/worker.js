@@ -35,9 +35,6 @@ self.process = {
     return '';
   },
 };
-
-var parsersLoaded = {};
-
 self.assert = {ok: function() {}, strictEqual: function() {}};
 self.require = function require(path) {
   if (path === 'stream') {
@@ -67,6 +64,8 @@ if (typeof prettier === 'undefined') {
 if (typeof prettier === 'undefined') {
   prettier = index; // eslint-disable-line
 }
+
+var parsersLoaded = {};
 
 importScripts('promise-worker.register.js');
 
