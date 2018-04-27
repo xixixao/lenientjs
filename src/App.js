@@ -29,8 +29,8 @@ const App = () => (
             Use LenientJS and you'll never miss a comma again. Commas are
             optional and inferred almost everywhere - in objects and array
             literals, in function argument and parameter lists. You can even
-            ommit them when typing multiple expressions on a single line, and
-            have Prettier fill the commas in for you.
+            ommit them between multiple expressions on a single line, and have
+            Prettier fill the commas in for you.
           </p>
         </div>
         <div className="column">
@@ -186,13 +186,12 @@ j = () => {a: 1, b: 2}`}</pre>
           </li>
           <li>A plugin for Babel's Babylon which parses the Lenient syntax</li>
           <li>
-            <strong>(not yet implemented)</strong> An Atom package which
-            performs the transpilation on file load/save.
+            An Atom package which performs the transpilation on file load/save.
           </li>
         </ol>
         <p>
           To display all editor annotations correctly, Prettier also has to
-          support source maps.
+          support source maps <strong>(not yet implemented)</strong>.
         </p>
       </div>
       <div className="centerColumn">
