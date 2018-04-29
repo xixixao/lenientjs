@@ -56,7 +56,7 @@ yarn test --watchAll
 ```bash
 yarn build:atom
 cd atom-lenientjs
-apm publish minor
+apm publish patch
 ```
 
 ### Website

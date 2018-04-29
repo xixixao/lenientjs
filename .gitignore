@@ -1,6 +1,8 @@
 .DS_Store
+yarn-error.log
 atom-lenientjs
 babel
+language-babel
 node_modules
 prettier
 website

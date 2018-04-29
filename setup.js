@@ -29,6 +29,12 @@ shell.cd('atom-lenientjs');
 shell.exec('yarn');
 shell.cd('..');
 
+console.log(chalk.cyan('Cloning language-babel...'));
+clone('https://github.com/xixixao/language-babel');
+shell.cd('language-babel');
+shell.exec('git checkout lenient');
+shell.cd('..');
+
 console.log(chalk.cyan('Cloning website...'));
 clone('https://github.com/xixixao/lenientjs.git website');
 shell.cd('website');
