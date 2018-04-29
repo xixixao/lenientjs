@@ -39,11 +39,11 @@ const App = () => (
             {`object = {
   myFunctionA()
     ...
-    return "sucess"
+    return "success"
 
   myFunctionB()
     ...
-    return "more sucess"
+    return "more success"
 }`}
           </ReadOnlyEditor>
         </div>
