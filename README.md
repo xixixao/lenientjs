@@ -39,6 +39,13 @@ yarn bump
 When either fails, `cd` into respective directory, run `git status`, merge
 the conflicts and run `git rebase --continue`.
 
+Individually:
+
+```sh
+yarn bump:babylon
+yarn bump:prettier
+```
+
 ## Run tests
 
 ```sh
@@ -53,10 +60,18 @@ yarn test --watchAll
 
 ### Atom Package
 
-```bash
+```sh
 yarn build:atom
 cd atom-lenientjs
 apm publish patch
+```
+
+To update any of the individual compiled dependencies, use one of these:
+
+```sh
+yarn build:atom:babylon
+yarn build:atom:prettier
+yarn build:atom:grammar
 ```
 
 ### Website
