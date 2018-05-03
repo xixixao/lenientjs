@@ -18,9 +18,9 @@
     "build:atom:babylon": "node scripts/build-atom-babylon.js",
     "build:atom:prettier": "node scripts/build-atom-prettier.js",
     "build:atom:grammar": "node scripts/build-atom-grammar.js",
-    "setup": "node setup.js",
+    "setup": "node scripts/setup.js",
     "test":
-      "cd prettier; ln -sf ../../babel/packages/babylon node_modules/babylon-lenient; yarn test:lenient"
+      "cd prettier; yarn test:lenient"
   },
   "prettier": {
     "bracketSpacing": false,
