@@ -94,3 +94,12 @@ Deploy to Github:
 ```sh
 yarn deploy
 ```
+
+# Troubleshooting
+
+Make sure you have installed the latest stable version of:
+
+1. Git
+2. Yarn
+3. Node.js
+
