@@ -25,9 +25,6 @@ shell.cd('..');
 
 console.log(chalk.cyan('Cloning atom-lenientjs...'));
 clone('https://github.com/xixixao/atom-lenientjs.git');
-shell.cd('atom-lenientjs');
-shell.exec('yarn');
-shell.cd('..');
 
 console.log(chalk.cyan('Cloning language-babel...'));
 clone('https://github.com/xixixao/language-babel');
