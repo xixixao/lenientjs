@@ -15,3 +15,4 @@ shell.cp('dist/index.js', dest + '/prettier.js');
 
 shell.exec('yarn rollup -c scripts/build/rollup.third-party.config.js');
 shell.cp('dist/third-party.js', dest);
+shell.cd('..');

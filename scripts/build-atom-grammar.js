@@ -12,3 +12,4 @@ shell.cp(
   'grammars/Babel Language.json',
   '../atom-lenientjs/grammars/lenientjs-language.json',
 );
+shell.cd('..');

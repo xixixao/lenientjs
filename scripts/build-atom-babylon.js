@@ -15,3 +15,4 @@ shell.exec(
     '--environment parser:language-js/parser-babylon',
 );
 shell.cp('dist/parser-babylon.js', '../atom-lenientjs/dependencies');
+shell.cd('..');
