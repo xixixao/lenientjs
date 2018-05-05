@@ -19,8 +19,7 @@
     "build:atom:prettier": "node scripts/build-atom-prettier.js",
     "build:atom:grammar": "node scripts/build-atom-grammar.js",
     "setup": "node scripts/setup.js",
-    "test":
-      "cd prettier; yarn test:lenient"
+    "test": "cd prettier; yarn test:lenient"
   },
   "prettier": {
     "bracketSpacing": false,
