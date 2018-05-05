@@ -4,7 +4,7 @@ A better syntax for JavaScript. https://xixixao.github.io/lenientjs/
 
 # Development
 
-## Setup
+## Initial Setup
 
 This will take a few minutes (clones both Babel and Prettier):
 
@@ -17,18 +17,20 @@ yarn setup
 
 If you want to submit a PR, add your own forks of Prettier and Babel as separate remotes.
 
-## Modify Prettier
+## Making Changes and Testing
+
+### Modify Prettier
 
 No building required, you can run tests straight off of source.
 
-## Modify Babylon
+### Modify Babylon
 
 ```sh
 cd babel
 make watch
 ```
 
-## Bump Prettier/Babylon
+### Bump Base Version of Prettier/Babylon
 
 Take changes from original Prettier/Babel and rebase Lenient on top
 
@@ -46,17 +48,20 @@ yarn bump:babylon
 yarn bump:prettier
 ```
 
-## Run tests
+### Run tests
 
 ```sh
-yarn test
+cd prettier
+yarn test:lenient
 ```
 
 or during development use watch mode:
 
 ```sh
-yarn test --watchAll
+yarn test:lenient --watchAll
 ```
+
+## Upgrading Builds and Releasing
 
 ### Atom Package
 
@@ -74,7 +79,7 @@ yarn build:atom:prettier
 yarn build:atom:grammar
 ```
 
-### Website
+### Lenient JS Website
 
 Watch changes and serve locally:
 
@@ -95,11 +100,10 @@ Deploy to Github:
 yarn deploy
 ```
 
-# Troubleshooting
+## Troubleshooting
 
 Make sure you have installed the latest stable version of:
 
-1. Git
-2. Yarn
-3. Node.js
-
+1.  Git
+2.  Yarn
+3.  Node.js
