@@ -1,11 +1,8 @@
 'use strict';
 
-const chalk = require('chalk');
-const shell = require('shelljs');
+const {info, shell} = require('./shell');
 
-shell.config.verbose = true;
-
-console.log(chalk.cyan('Copying syntax...'));
+info('Copying syntax...');
 shell.cd('language-babel');
 
 shell.cp(

@@ -1,13 +1,10 @@
 'use strict';
 
-const chalk = require('chalk');
-const shell = require('shelljs');
-
-shell.config.verbose = true;
+const {info, shell} = require('./shell');
 
 const dest = '../atom-lenientjs/dependencies';
 
-console.log(chalk.cyan('Building prettier...'));
+info('Building prettier...');
 shell.cd('prettier');
 
 shell.exec('yarn rollup -c scripts/build/rollup.index.config.js');

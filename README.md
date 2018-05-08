@@ -2,6 +2,43 @@
 
 A better syntax for JavaScript. https://xixixao.github.io/lenientjs/
 
+# WARNING
+
+If you're reading this, you found this repo too early. May I ask you to a) not share it widely (twitter, HN), b) be very careful if you try to use the APM package, as it WILL lose your work in edge cases I haven't run into/fixed yet.
+
+# Known Issues
+
+Lenient's pretty form:
+
+1.  catch prints parens
+
+From Babylon's test suite:
+
+> ! is severe, r is recent, P is bug in Prettier, B is bug in Babylon
+> !! is syntax collision
+
+1.  !P: Bare blocks don't print braces
+2.  !B: Class without name doesn't parse
+3.  !P: Switch cases printing collided with arrow function block logic, prints braces
+4.  P: File with new line prints empty file
+5.  rP: `if (morning) (function(){})` doesn't print on one line
+6.  !P: do while has space before while
+7.  P: bare for loop prints without parens
+8.  !B: `:=` is ignored in for loop variable
+9.  P,B: multiple labels are broken
+10. P: Empty switch body missing braces
+11. rP: `x = {get undef() {}};` doesn't print on one line
+12. !P: bare return followed by something needs a semicolon
+13. P: case needs `:` if next token is regex
+14. !B: defaults for arrow function params are broken
+15. !!P: `let x; for (x of y) f(x);` doesn't have a form, consider using `for (set x of y)` (could also use it in `for x;;b` form, or its alias `for x of y..z`)
+
+Find more:
+
+```sh
+node scripts/test-on-babylon-fixtures.js 417 yes
+```
+
 # Development
 
 ## Initial Setup
@@ -29,6 +66,8 @@ No building required, you can run tests straight off of source.
 cd babel
 make watch
 ```
+
+Note: if you just built babylon you have to restart `watch`.
 
 ### Bump Base Version of Prettier/Babylon
 

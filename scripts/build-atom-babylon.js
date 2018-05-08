@@ -1,11 +1,8 @@
 'use strict';
 
-const chalk = require('chalk');
-const shell = require('shelljs');
+const {info, shell} = require('./shell');
 
-shell.config.verbose = true;
-
-console.log(chalk.cyan('Building babylon...'));
+info('Building babylon...');
 shell.cd('babel');
 shell.exec('yarn gulp build-babylon');
 shell.cd('../prettier');
