@@ -10,25 +10,25 @@ If you're reading this, you found this repo too early. May I ask you to a) not s
 
 Lenient's pretty form:
 
-1.  catch prints parens
+1.  ~~catch prints parens~~
 
 From Babylon's test suite, in order of first failing tests:
 
 > ! is severe, r is recent, P is bug in Prettier, B is bug in Babylon
 > !! is syntax collision
 
-1.  !P: Bare blocks don't print braces (including in for, module)
+1.  ~~!P: Bare blocks don't print braces (in switch, module)~~
 2.  !B: Class without name doesn't parse
-3.  !P: Switch cases printing collided with arrow function block logic, prints braces
-4.  P: File with new line prints empty file
-5.  rP: `if (morning) (function(){})` doesn't print on one line
-6.  !P: do while has space before while
-7.  P: bare for loop prints without parens around `;;`
-8.  !B: `:=` is ignored in for loop variable
-9.  P,B: multiple labels are broken
-10. P: Empty switch body missing braces
-11. r!P: Single line objects with methods dont print on one line
-12. !P: bare return followed by something needs a semicolon
+3.  !B: Switch cases parse into blocks
+4.  ~~!P: Switch case blocks are not preserved~~
+5.  P: File with new line prints empty file
+6.  rP: `if (morning) (function(){})` doesn't print on one line
+7.  ~~!P: do while has space before while~~
+8.  P: bare for loop prints without parens around `;;`
+9.  !B: `:=` is ignored in for loop variable
+10. P,B: multiple labels are broken
+11. ~~r!P: Single line objects with methods dont print on one line~~
+12. ~~!P: bare return followed by something needs a semicolon~~
 13. P: case needs `:` if next token is regex
 14. !B: defaults for arrow function params are broken
 15. !!P,B: `let x; for (x of y) f(x);` doesn't have a form, consider using `for (set x of y)` (could also use it in `for x;;b` form, or its alias `for x of y..z`)
