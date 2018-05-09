@@ -18,24 +18,24 @@ From Babylon's test suite, in order of first failing tests:
 > !! is syntax collision
 
 1.  ~~!P: Bare blocks don't print braces (in switch, module)~~
-2.  !B: Class without name doesn't parse
-3.  !B: Switch cases parse into blocks
+2.  ~~!B: Class without name doesn't parse~~
+3.  ~~!B: Switch cases parse into blocks~~
 4.  ~~!P: Switch case blocks are not preserved~~
 5.  P: File with new line prints empty file
 6.  rP: `if (morning) (function(){})` doesn't print on one line
 7.  ~~!P: do while has space before while~~
 8.  P: bare for loop prints without parens around `;;`
-9.  !B: `:=` is ignored in for loop variable
+9.  ~~!B: `:=` is ignored in for loop variable~~
 10. P,B: multiple labels are broken
 11. ~~r!P: Single line objects with methods dont print on one line~~
 12. ~~!P: bare return followed by something needs a semicolon~~
 13. P: case needs `:` if next token is regex
-14. !B: defaults for arrow function params are broken
+14. ~~!P: defaults for arrow function params need to use `:=`~~
 15. !!P,B: `let x; for (x of y) f(x);` doesn't have a form, consider using `for (set x of y)` (could also use it in `for x;;b` form, or its alias `for x of y..z`)
 16. B: `'use strict'` inside function is broken
 17. P,B: for loop bare initializer with default doesn't work
 18. B: Function block is swallowing enclosing interpolation brace
-19. !B: Implicit const doesn't work in export
+19. ~~!B: Implicit const doesn't work in export~~
 20. P: Trailing comment after declaration is pushed after semi
 21. P: bare do block must keep wrapping parens
 22. B: private fields don't work
@@ -49,6 +49,8 @@ From Babylon's test suite, in order of first failing tests:
 30. P: Leading generic type needs ASI protection
 31. P: JSX inside comparison needs parens
 32. P: Bare JSX self-closing tags need ASI protection
+33. !B: class without name swallows leading comment
+34. r!P: destructuring in catch clause needs to force parens
 
 Check them:
 
