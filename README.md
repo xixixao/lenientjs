@@ -12,7 +12,7 @@ Lenient's pretty form:
 
 1.  catch prints parens
 
-From Babylon's test suite:
+From Babylon's test suite, in order of first failing tests:
 
 > ! is severe, r is recent, P is bug in Prettier, B is bug in Babylon
 > !! is syntax collision
@@ -31,20 +31,20 @@ From Babylon's test suite:
 12. !P: bare return followed by something needs a semicolon
 13. P: case needs `:` if next token is regex
 14. !B: defaults for arrow function params are broken
-15. !!P: `let x; for (x of y) f(x);` doesn't have a form, consider using `for (set x of y)` (could also use it in `for x;;b` form, or its alias `for x of y..z`)
+15. !!P,B: `let x; for (x of y) f(x);` doesn't have a form, consider using `for (set x of y)` (could also use it in `for x;;b` form, or its alias `for x of y..z`)
 16. B: `'use strict'` inside function is broken
-17. P,B: for loop bare initializer doesn't work
+17. P,B: for loop bare initializer with default doesn't work
 18. B: Function block is swallowing enclosing interpolation brace
-19. B: Implicit const doesn't work in export
+19. !B: Implicit const doesn't work in export
 20. P: Trailing comment after declaration is pushed after semi
 21. P: bare do block must keep wrapping parens
 22. B: private fields don't work
 23. !B: `:=` should not be required for static
-24. B: JSX inside if block doesn't work
+24. !B: JSX inside if block doesn't work
 25. B: bare comment in empty class body doesn't work
-26. B: implicit blocks don't work for Flow modules
-27. B: Flow function declaration missing lenient comma, also object types
-28. B: Switch parens trip up on initial paren
+26. !B: implicit blocks don't work for Flow modules
+27. !B: Flow function declaration missing lenient comma, also object types
+28. !B: Switch parens trip up on initial paren
 29. B: method following trailing case clause fails
 30. P: Leading generic type needs ASI protection
 31. P: JSX inside comparison needs parens
