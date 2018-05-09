@@ -17,26 +17,43 @@ From Babylon's test suite:
 > ! is severe, r is recent, P is bug in Prettier, B is bug in Babylon
 > !! is syntax collision
 
-1.  !P: Bare blocks don't print braces
+1.  !P: Bare blocks don't print braces (including in for, module)
 2.  !B: Class without name doesn't parse
 3.  !P: Switch cases printing collided with arrow function block logic, prints braces
 4.  P: File with new line prints empty file
 5.  rP: `if (morning) (function(){})` doesn't print on one line
 6.  !P: do while has space before while
-7.  P: bare for loop prints without parens
+7.  P: bare for loop prints without parens around `;;`
 8.  !B: `:=` is ignored in for loop variable
 9.  P,B: multiple labels are broken
 10. P: Empty switch body missing braces
-11. rP: `x = {get undef() {}};` doesn't print on one line
+11. r!P: Single line objects with methods dont print on one line
 12. !P: bare return followed by something needs a semicolon
 13. P: case needs `:` if next token is regex
 14. !B: defaults for arrow function params are broken
 15. !!P: `let x; for (x of y) f(x);` doesn't have a form, consider using `for (set x of y)` (could also use it in `for x;;b` form, or its alias `for x of y..z`)
+16. B: `'use strict'` inside function is broken
+17. P,B: for loop bare initializer doesn't work
+18. B: Function block is swallowing enclosing interpolation brace
+19. B: Implicit const doesn't work in export
+20. P: Trailing comment after declaration is pushed after semi
+21. P: bare do block must keep wrapping parens
+22. B: private fields don't work
+23. !B: `:=` should not be required for static
+24. B: JSX inside if block doesn't work
+25. B: bare comment in empty class body doesn't work
+26. B: implicit blocks don't work for Flow modules
+27. B: Flow function declaration missing lenient comma, also object types
+28. B: Switch parens trip up on initial paren
+29. B: method following trailing case clause fails
+30. P: Leading generic type needs ASI protection
+31. P: JSX inside comparison needs parens
+32. P: Bare JSX self-closing tags need ASI protection
 
-Find more:
+Check them:
 
 ```sh
-node scripts/test-on-babylon-fixtures.js 417 yes
+node scripts/test-on-babylon-fixtures.js 0 yes
 ```
 
 # Development

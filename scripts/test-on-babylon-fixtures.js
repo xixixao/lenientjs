@@ -20,23 +20,25 @@ const fileNames = shell.ls('./babel/packages/babylon/test/fixtures/**/*.js');
 shell.config.verbose = false;
 
 let numSkipped = 0;
+let numInvalid = 0;
 let numSucceeded = 0;
 let numFailed = 0;
-let numChecked = 0;
+let stopped = false;
 
 const runInfo = () => {
   log();
-  info(`Number of tests: ${numSkipped + numSucceeded + numFailed}`);
+  info(
+    `Number of tests: ${numSkipped + numInvalid + numSucceeded + numFailed}`,
+  );
   info(`Number of tests succeeded: ${numSucceeded}`);
   info(`Number of tests failed: ${numFailed}`);
 };
 
 for (const fileName of fileNames) {
-  if (numSkipped + numSucceeded + numFailed <= NUM_TO_SKIP) {
+  if (numSkipped < NUM_TO_SKIP) {
     numSkipped++;
     continue;
   }
-  let failed = false;
   try {
     const unformattedJSCode = shell.cat(fileName).toString();
     let jsCode;
@@ -50,9 +52,9 @@ for (const fileName of fileNames) {
       });
     } catch (e) {
       // Syntax error example, not useful to us
+      numInvalid++;
       continue;
     }
-    shell.echo('-n', '.');
     const lenientCode = PRETTIER.format(jsCode, {
       ...prettierOptions,
       bracketSpacing: false,
@@ -72,19 +74,22 @@ for (const fileName of fileNames) {
         }),
     });
     expect(newJSCode).toBe(jsCode);
+    shell.echo('-n', '.');
     numSucceeded++;
   } catch (e) {
     numFailed++;
     if (STOP_AFTER_FAILURE) {
       log();
       info(fileName);
-      log(e.message);
       log(chalk.keyword('lightgray')(e.stack));
       runInfo();
       if (!confirm('Continue?')) {
+        stopped = true;
         break;
       }
     }
   }
 }
-runInfo();
+if (!stopped) {
+  runInfo();
+}
