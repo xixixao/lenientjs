@@ -39,18 +39,19 @@ From Babylon's test suite, in order of first failing tests:
 20. P: Trailing comment after declaration is pushed after semi
 21. P: bare do block must keep wrapping parens
 22. B: private fields don't work
-23. !B: `:=` should not be required for static
-24. !B: JSX inside if block doesn't work
+23. ~~!B: `:=` should not be required for static~~
+24. ~~!B: JSX inside if block doesn't work~~
 25. B: bare comment in empty class body doesn't work
-26. !B: implicit blocks don't work for Flow modules
-27. !B: Flow function declaration missing lenient comma, also object types
-28. !B: Switch parens trip up on initial paren
-29. B: method following trailing case clause fails
-30. P: Leading generic type needs ASI protection
-31. P: JSX inside comparison needs parens
-32. P: Bare JSX self-closing tags need ASI protection
-33. !B: class without name swallows leading comment
+26. ~~!B: implicit blocks don't work for Flow modules~~
+27. ~~!B: Flow function declaration missing lenient comma, also object types~~
+28. ~~!B: Switch parens trip up on initial paren~~
+29. ~~B: method following trailing case clause fails~~
+30. ~~B: Leading generic type needs ASI protection~~
+31. ~~P: JSX inside comparison needs parens~~
+32. P: Bare JSX tags need ASI protection
+33. ~~!B: class swallows leading comment~~
 34. r!P: destructuring in catch clause needs to force parens
+35. P: inline super class doesn't work #2282
 
 Check them:
 
