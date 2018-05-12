@@ -14,10 +14,15 @@ const STABLE_BABYLON = require('babylon');
 const PRETTIER = require('../prettier');
 const BABYLON = require('../babel/packages/babylon');
 
-const NUM_TO_SKIP = process.argv[2] || 0;
-const STOP_AFTER_FAILURE = process.argv[3];
+let [_node, _script, FIXTURES, NUM_TO_SKIP, STOP_AFTER_FAILURE] = process.argv;
+NUM_TO_SKIP = NUM_TO_SKIP || 0;
 
-const fileNames = shell.ls('./babel/packages/babylon/test/fixtures/**/*.js');
+const fixturePath =
+  FIXTURES === 'babylon'
+    ? './babel/packages/babylon/test/fixtures/**/*.js'
+    : './prettier/tests/*/*.js';
+
+const fileNames = shell.ls(fixturePath);
 shell.config.verbose = false;
 
 let numSkipped = 0;
