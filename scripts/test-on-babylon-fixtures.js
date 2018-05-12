@@ -10,6 +10,7 @@ const {babylonOptions, prettierOptions} = require('./transpileConfig');
 
 info('finding files');
 
+const STABLE_BABYLON = require('babylon');
 const PRETTIER = require('../prettier');
 const BABYLON = require('../babel/packages/babylon');
 
@@ -43,18 +44,19 @@ for (const fileName of fileNames) {
     const unformattedJSCode = shell.cat(fileName).toString();
     let jsCode;
     try {
-      jsCode = PRETTIER.format(unformattedJSCode, {
-        ...prettierOptions,
-        bracketSpacing: false,
-        lenient: false,
-        semi: true,
-        parser: text => BABYLON.parse(text, babylonOptions),
-      });
+      STABLE_BABYLON.parse(unformattedJSCode, babylonOptions);
     } catch (e) {
       // Syntax error example, not useful to us
       numInvalid++;
       continue;
     }
+    jsCode = PRETTIER.format(unformattedJSCode, {
+      ...prettierOptions,
+      bracketSpacing: false,
+      lenient: false,
+      semi: true,
+      parser: text => BABYLON.parse(text, babylonOptions),
+    });
     const lenientCode = PRETTIER.format(jsCode, {
       ...prettierOptions,
       bracketSpacing: false,

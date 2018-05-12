@@ -10,7 +10,8 @@ If you're reading this, you found this repo too early. May I ask you to a) not s
 
 Lenient's pretty form:
 
-1.  ~~catch prints parens~~
+1.  P: ~~catch prints parens~~
+2.  B: arrow functions don't have lenient commas
 
 From Babylon's test suite, in order of first failing tests:
 
@@ -52,6 +53,7 @@ From Babylon's test suite, in order of first failing tests:
 33. ~~!B: class swallows leading comment~~
 34. r!P: destructuring in catch clause needs to force parens
 35. P: inline super class doesn't work #2282
+36. B: do blocks swallow JSX closing interpolation brace
 
 Check them:
 
