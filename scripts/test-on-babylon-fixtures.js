@@ -80,7 +80,9 @@ for (const fileName of fileNames) {
     numSucceeded++;
   } catch (e) {
     numFailed++;
-    if (STOP_AFTER_FAILURE) {
+    if (!STOP_AFTER_FAILURE) {
+      shell.echo('-n', chalk.red('.'));
+    } else {
       log();
       info(fileName);
       log(chalk.keyword('lightgray')(e.stack));
