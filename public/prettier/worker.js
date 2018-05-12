@@ -18,12 +18,13 @@ self.Buffer = {
 };
 self.constants = {};
 // eslint-disable-next-line
-module$1 = module = os = crypto = {};
+module$1 = module = os = crypto = buffer = {};
 self.fs = {readFile: function() {}};
 // eslint-disable-next-line no-undef
 os.homedir = function() {
   return '/home/prettier';
 };
+os.EOL = '\n';
 self.process = {
   argv: [],
   env: {PRETTIER_DEBUG: true},
@@ -44,7 +45,7 @@ self.require = function require(path) {
     return {PassThrough() {}};
   }
   if (path === './third-party') {
-    return {};
+    return {findParentDir() {}};
   }
 
   if (~path.indexOf('parser-')) {
@@ -57,6 +58,10 @@ self.require = function require(path) {
   }
 
   return self[path];
+};
+self.__dirname = '';
+self.events = {
+  EventEmitter: function() {},
 };
 
 var prettier;
