@@ -24,7 +24,7 @@ info('Cloning atom-lenientjs...');
 clone('https://github.com/xixixao/atom-lenientjs.git');
 
 info('Cloning language-babel...');
-clone('https://github.com/xixixao/language-babel');
+clone('https://github.com/xixixao/language-babel.git');
 shell.cd('language-babel');
 shell.exec('git checkout lenient');
 shell.cd('..');

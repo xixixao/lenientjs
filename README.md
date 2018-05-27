@@ -6,6 +6,18 @@ A better syntax for JavaScript. https://xixixao.github.io/lenientjs/
 
 If you're reading this, you found this repo too early. May I ask you to a) not share it widely (twitter, HN), b) be very careful if you try to use the APM package, as it WILL lose your work in edge cases I haven't run into/fixed yet.
 
+# Child Repositories
+
+Atom package: https://github.com/xixixao/atom-lenientjs
+
+Atom Language Babel fork: https://github.com/xixixao/language-babel/tree/lenient
+
+Prettier fork: https://github.com/xixixao/prettier/tree/lenient
+
+Babylon fork: https://github.com/xixixao/babel/tree/lenient/packages/babylon
+
+Lenient's website: https://github.com/xixixao/lenientjs/tree/website
+
 # Known Issues
 
 Lenient's pretty form:
