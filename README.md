@@ -201,6 +201,8 @@ Deploy to Github:
 yarn deploy
 ```
 
+Remember: For now, Prettier doesn't expose web version, so in worker.js we mock out bunch of Node modules - if Prettier adds more native dependencies, we need to update our worker.js according to the one in the main repo.
+
 ## Troubleshooting
 
 Make sure you have installed the latest stable version of:
