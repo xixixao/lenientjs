@@ -174,6 +174,16 @@ or during development use watch mode:
 yarn test:lenient --watchAll
 ```
 
+## Version Control
+
+You can use the `gr` script to run a command over all the child repos (after setup):
+
+```sh
+yarn --silent gr git status
+```
+
+You can use any shell aliases you have.
+
 ## Upgrading Builds and Releasing
 
 ### Atom Package

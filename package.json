@@ -10,6 +10,7 @@
     "babylon": "7.0.0-beta.42",
     "chalk": "^2.3.2",
     "expect": "^22.4.3",
+    "git-run": "xixixao/gr",
     "readline-sync": "^1.4.9",
     "shelljs": "^0.8.1"
   },
@@ -21,6 +22,7 @@
     "build:atom:babylon": "node scripts/build-atom-babylon.js",
     "build:atom:prettier": "node scripts/build-atom-prettier.js",
     "build:atom:grammar": "node scripts/build-atom-grammar.js",
+    "gr": "node_modules/.bin/gr . website prettier babel language-babel",
     "setup": "node scripts/setup.js",
     "test": "cd prettier; yarn test:lenient"
   },
