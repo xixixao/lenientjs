@@ -161,7 +161,11 @@ yarn bump:babylon
 yarn bump:prettier
 ```
 
+You might need to symlink `babylon` to `prettier` again after doing this.
+
 ### Run tests
+
+Make sure to watch/build on `babel` if you just pulled.
 
 ```sh
 cd prettier
