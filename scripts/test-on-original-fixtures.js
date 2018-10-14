@@ -1,5 +1,5 @@
-// This will walk over all tests in babylon's suite and convert them from
-// JS to Lenient and back.
+// This will walk over all tests in babylon/prettier's suite and convert them
+// from JS to Lenient and back.
 //
 // This doesn't guarantee that the Lenient version is perfect, but it's a
 // pretty good approximation.
