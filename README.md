@@ -174,6 +174,13 @@ or during development use watch mode:
 yarn test:lenient --watchAll
 ```
 
+Run test for syntax highlighting:
+
+```sh
+cd language-babel
+atom --test spec/grammar-spec.coffee
+```
+
 ## Version Control
 
 You can use the `gr` script to run a command over all the child repos (after setup):
