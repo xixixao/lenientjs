@@ -2,15 +2,20 @@
 
 A better syntax for JavaScript. https://xixixao.github.io/lenientjs/
 
-# WARNING
+# Status
 
-If you're reading this, you found this repo too early. May I ask you to a) not share it widely (twitter, HN), b) be very careful if you try to use the APM package, as it WILL lose your work in edge cases I haven't run into/fixed yet.
+This project is in an alpha stage, and you should not rely on it to not lose your work. There are many known issues, both in the transform and in the editor integration.
+
+# Install
+
+To try out the syntax with your files, install the Atom package `lenientjs`, and follow the steps here: https://github.com/xixixao/atom-lenientjs.
+
 
 # Child Repositories
 
 Atom package: https://github.com/xixixao/atom-lenientjs
 
-Atom Language Babel fork: https://github.com/xixixao/language-babel/tree/lenient
+Atom Language Babel (syntax highlighter) fork: https://github.com/xixixao/language-babel/tree/lenient
 
 Prettier fork: https://github.com/xixixao/prettier/tree/lenient
 
@@ -117,7 +122,7 @@ node scripts/test-on-original-fixtures.js prettier 0 yes
 
 ## Initial Setup
 
-This will take a few minutes (clones both Babel and Prettier):
+Clone this repo and use the setup script to clone all the child repos:
 
 ```sh
 git clone https://github.com/xixixao/lenientjs.git
